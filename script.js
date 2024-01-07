@@ -60,5 +60,23 @@ function showQuestion(){
     document.getElementById('answer3').innerHTML=`${questArray['answer_3']}`; 
     document.getElementById('answer4').innerHTML=`${questArray['answer_4']}`;
     document.getElementById('currentQ').innerHTML=`${currentQuestion+1}`;
+}
+
+function answer(answer){
+    const questArray = questions[currentQuestion];
+    if(answer == questArray['right_answer']){
+        document.getElementById(`answer${answer}`).parentNode.classList.add('bg-success')
+    }
+    else{
+        document.getElementById(`answer${answer}`).parentNode.classList.add('bg-danger')
+        document.getElementById(`answer${questArray['right_answer']}`).parentNode.classList.add('bg-success')
+    
+    };
+}
+
+function nextQ(){
+    document.getElementById(`answer1`).classList.remove('false')
+
     currentQuestion++;      
+    showQuestion();
 }
