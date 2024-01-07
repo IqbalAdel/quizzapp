@@ -11,10 +11,10 @@
     <script defer src="script.js"></script>
     <title>Quiz App</title>
   </head>
-  <body>
+  <body onload="init()">
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
-        <span class="navbar-brand mb-0 h1">QuizApp</span>
+        <span class="navbar-brand mb-0 h1">Wer wird Millionär?</span>
       </div>
     </nav>
 
@@ -22,37 +22,37 @@
         <div class="card quiz-card">
             <img src="./img/pencil.jpg" class="card-img-top" alt="...">
             <div class="card-body">
-              <h5 class="card-title">Frage</h5>
+              <h5 class="card-title" id="question">Frage</h5>
               
               <div class="card mb-2">
-                <div class="card-body">
+                <div id="answer1" class="card-body">
                   Antwort
                 </div>
               </div>
               
               <div class="card mb-2">
-                <div class="card-body">
+                <div id="answer2" class="card-body">
                   Antwort
                 </div>
               </div>
               
               <div class="card mb-2">
-                <div class="card-body">
+                <div id="answer3" class="card-body">
                   Antwort
                 </div>
               </div>
               
               <div class="card mb-2">
-                <div class="card-body">
+                <div id="answer4" class="card-body">
                   Antwort
                 </div>
               </div>
 
               <div class="question-footer">
                 <span>
-                    <b>1</b> von <b>5</b> Fragen
+                    <b id="currentQ">1</b> von <b id="totalQ">5</b> Fragen
                 </span>
-                <button class="btn btn-danger">Nächste Frage</button>
+                <button onclick="showQuestion()" class="btn btn-danger">Nächste Frage</button>
               </div>
             </div>
           </div>

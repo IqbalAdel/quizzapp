@@ -44,3 +44,21 @@ let questions = [
         "right_answer":"4",
     },
 ];
+let currentQuestion = 0
+
+function init(){
+    document.getElementById('totalQ').innerHTML=`${questions.length}`;
+    showQuestion();
+    
+}
+
+function showQuestion(){
+    const questArray = questions[currentQuestion];
+    document.getElementById('question').innerHTML=`${questArray['question']}`; 
+    document.getElementById('answer1').innerHTML=`${questArray['answer_1']}`; 
+    document.getElementById('answer2').innerHTML=`${questArray['answer_2']}`; 
+    document.getElementById('answer3').innerHTML=`${questArray['answer_3']}`; 
+    document.getElementById('answer4').innerHTML=`${questArray['answer_4']}`;
+    document.getElementById('currentQ').innerHTML=`${currentQuestion+1}`;
+    currentQuestion++;      
+}
