@@ -45,6 +45,11 @@ let questions = [
     },
 ];
 let currentQuestion = 0
+let score = 0
+let progress = 0
+let audioSuccess = new Audio('audio/success-audio.mp3');
+let audioFail = new Audio('audio/fail-audio.mp3');
+
 
 function init(){
     document.getElementById('totalQ').innerHTML=`${questions.length}`;
@@ -55,27 +60,40 @@ function init(){
 function showQuestion(){
     const questArray = questions[currentQuestion];
     if(currentQuestion >= questions.length){
-        // show end-screen
+        document.getElementById('finalBody').classList.remove('hide')
+        document.getElementById('finalBody').classList.add('endscreen') 
+        document.getElementById('questBody').classList.add('hide')
+        document.getElementById('playerScore').innerHTML = score
+        document.getElementById('header-img').src = "img/brain result.png"
+
     }
     else{
+        progress = (currentQuestion+1)/questions.length 
+        progress = Math.round(progress*100) 
         document.getElementById('question').innerHTML=`${questArray['question']}`; 
         document.getElementById('answer1').innerHTML=`${questArray['answer_1']}`; 
         document.getElementById('answer2').innerHTML=`${questArray['answer_2']}`; 
         document.getElementById('answer3').innerHTML=`${questArray['answer_3']}`; 
         document.getElementById('answer4').innerHTML=`${questArray['answer_4']}`;
         document.getElementById('currentQ').innerHTML= currentQuestion+1;
+        document.getElementById('progBar').style.width = `${progress}%`;
+        document.getElementById('progBar').innerHTML = `${progress}%`;
+
     }
 }
 
 function answer(answer){
     const questArray = questions[currentQuestion];
     if(answer == questArray['right_answer']){
-        document.getElementById(`answer${answer}`).parentNode.classList.add('bg-success')
+        document.getElementById(`answer${answer}`).parentNode.classList.add('bg-success');
+        score++;
+        audioSuccess.play();
+
     }
     else{
         document.getElementById(`answer${answer}`).parentNode.classList.add('bg-danger')
         document.getElementById(`answer${questArray['right_answer']}`).parentNode.classList.add('bg-success')
-    
+        audioFail.play();
     };
     document.getElementById('next-button').disabled = false;
 }
@@ -89,4 +107,17 @@ function nextQ(){
     currentQuestion++;      
     showQuestion();
     document.getElementById('next-button').disabled = true;
+}
+
+function restart(){
+    document.getElementById('header-img').src = "./img/pencil.jpg";
+    currentQuestion = 0;
+    score = 0;
+    progress = 0;
+    document.getElementById('finalBody').classList.add('hide');
+    document.getElementById('finalBody').classList.remove('endscreen'); 
+    document.getElementById('questBody').classList.remove('hide');
+    showQuestion();
+    
+
 }
